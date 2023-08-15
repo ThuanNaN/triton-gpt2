@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  triton:
+    container_name: triton_cont
+    image: triton_img
+    restart: on-failure
+    volumes:
+      - /model_repository:/models
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8002:8002
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #       - driver: nvidia
+    #         count: 1
+    #         capabilities: [gpu]
+    entrypoint: /bin/sh -c "tritonserver --model-repository=/models"
+
+    
+
+# docker run --shm-size=256m -it --rm -p8000:8000 -p8001:8001 -p8002:8002 -v $(pwd)/model_repository:/models triton_img
+
+# docker run --gpus=all --shm-size=256m -it --rm -p8000:8000 -p8001:8001 -p8002:8002 -v $(pwd)/model_repository:/models triton_img
+
+
+
+# docker run -it --net=host -v ${PWD}:/workspace/ nvcr.io/nvidia/tritonserver:23.07-py3-sdk bash
+
