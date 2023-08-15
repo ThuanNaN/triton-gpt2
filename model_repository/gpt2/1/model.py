@@ -59,7 +59,7 @@ class TritonPythonModel:
 			outputs = self.model.generate(inputs = input_ids, 
 											num_beams=4,
 											do_sample=True,
-											max_new_tokens=50,
+											max_new_tokens=200,
 											pad_token_id=50256)
 
 		responses = []
