@@ -1,4 +1,4 @@
-# Deploy GPT2 to tritonserevr 
+# Deploy GPT2 model to triton server
 
 ## Repare image
 ```bash
