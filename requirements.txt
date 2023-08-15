@@ -3,3 +3,4 @@ transformers[torch]==4.30.1
 datasets==2.13.1
 tiktoken==0.4.0
 pillow
+gdown
