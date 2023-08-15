@@ -1,5 +1,7 @@
 # Deploy GPT2 model to triton server
 
+See the tutorials at: https://github.com/triton-inference-server/tutorials
+
 ## 1. Clone repository
 ```bash
 git clone https://github.com/ThuanNaN/triton-gpt2.git
