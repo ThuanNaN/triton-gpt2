@@ -30,3 +30,22 @@ docker run -it --net=host -v ${PWD}:/workspace/ nvcr.io/nvidia/tritonserver:23.0
 python client.py --prompt "Say somethings"
 ```
 
+down_all:
+	make triton_down
+	make fastapi_down
+
+up_all:
+	make triton_up
+	make fastapi_up
+
+triton_up:
+	PWD=$(pwd) docker compose -f ./docker/tritonserver/docker-compose.yml up -d
+
+triton_down:
+	PWD=$(pwd) docker compose -f ./docker/tritonserver/docker-compose.yml down
+
+fastapi_up:
+	PWD=$(pwd) docker compose -f ./docker/fastapi/docker-compose.yml up -d
+
+fastapi_down:
+	PWD=$(pwd) docker compose -f ./docker/fastapi/docker-compose.yml down
