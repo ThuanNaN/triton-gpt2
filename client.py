@@ -1,16 +1,15 @@
+import argparse
+import numpy as np
 import tritonclient.http as httpclient
 from tritonclient.utils import np_to_triton_dtype
-import numpy as np
 
 
-def main():
+def main(prompt: str):
     client = httpclient.InferenceServerClient(url="localhost:8000")
 
     # Inputs
-    prompts = "This is a string"
-    text_obj = np.array([prompts], dtype="object")
+    text_obj = np.array([prompt], dtype="object")
     
-
     input_tensors = [
         httpclient.InferInput("TEXT", text_obj.shape, np_to_triton_dtype(text_obj.dtype)),
     ]
@@ -30,4 +29,7 @@ def main():
     print(query_response.as_numpy('TEXT_OUT')[0].decode("UTF-8"))
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--prompt", type=str, default="What is the answer to life, the universe, and everything?")
+    args = parser.parse_args()
+    main(args.prompt)
