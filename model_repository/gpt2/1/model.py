@@ -1,4 +1,5 @@
 import os
+import gdown
 import torch
 from typing import Dict, List
 from time import perf_counter 
@@ -18,6 +19,10 @@ class TritonPythonModel:
 
 		self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 		ckpt_path = './student_distill.pt'
+		if not os.path.exists(ckpt_path):
+			id = "1bzNpJvkPuhxA-qxIkXNP2w9ywYFwaASQ"
+			gdown.download(id=id, output=ckpt_path)
+		
 		ckpt = torch.load(ckpt_path, map_location=self.device )
 		self.model = GPT2LMHeadModel(ckpt['model_args'])
 		self.model.load_state_dict(ckpt['model'])
