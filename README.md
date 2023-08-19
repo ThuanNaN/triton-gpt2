@@ -43,3 +43,6 @@ curl -X 'POST' \
   -d ''
 ```
 
+## 5. Feature
+- [ ] Dynamic batch inference 
+
